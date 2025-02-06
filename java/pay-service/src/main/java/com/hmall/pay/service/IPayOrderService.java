@@ -1,9 +1,9 @@
-package com.hmall.service;
+package com.hmall.pay.service;
 
-import com.hmall.domain.dto.PayApplyDTO;
-import com.hmall.domain.dto.PayOrderFormDTO;
-import com.hmall.domain.po.PayOrder;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hmall.pay.domain.dto.PayApplyDTO;
+import com.hmall.pay.domain.dto.PayOrderFormDTO;
+import com.hmall.pay.domain.po.PayOrder;
 
 /**
  * <p>
