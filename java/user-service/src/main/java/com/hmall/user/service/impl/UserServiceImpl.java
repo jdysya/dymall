@@ -1,18 +1,18 @@
-package com.hmall.service.impl;
+package com.hmall.user.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hmall.common.exception.BadRequestException;
 import com.hmall.common.exception.BizIllegalException;
 import com.hmall.common.exception.ForbiddenException;
 import com.hmall.common.utils.UserContext;
-import com.hmall.config.JwtProperties;
-import com.hmall.domain.dto.LoginFormDTO;
-import com.hmall.domain.po.User;
-import com.hmall.domain.vo.UserLoginVO;
-import com.hmall.enums.UserStatus;
-import com.hmall.mapper.UserMapper;
-import com.hmall.service.IUserService;
-import com.hmall.utils.JwtTool;
+import com.hmall.user.config.JwtProperties;
+import com.hmall.user.domain.dto.LoginFormDTO;
+import com.hmall.user.domain.po.User;
+import com.hmall.user.domain.vo.UserLoginVO;
+import com.hmall.user.enums.UserStatus;
+import com.hmall.user.mapper.UserMapper;
+import com.hmall.user.service.IUserService;
+import com.hmall.user.utils.JwtTool;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;

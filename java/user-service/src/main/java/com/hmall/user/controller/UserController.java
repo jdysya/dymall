@@ -1,8 +1,8 @@
-package com.hmall.controller;
+package com.hmall.user.controller;
 
-import com.hmall.domain.dto.LoginFormDTO;
-import com.hmall.domain.vo.UserLoginVO;
-import com.hmall.service.IUserService;
+import com.hmall.user.domain.dto.LoginFormDTO;
+import com.hmall.user.domain.vo.UserLoginVO;
+import com.hmall.user.service.IUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

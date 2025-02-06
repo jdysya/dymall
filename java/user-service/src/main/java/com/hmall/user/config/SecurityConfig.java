@@ -1,5 +1,6 @@
-package com.hmall.config;
+package com.hmall.user.config;
 
+import com.hmall.user.config.JwtProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.hmall.config;
+package com.hmall.user.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

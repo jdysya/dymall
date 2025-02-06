@@ -1,7 +1,7 @@
-package com.hmall.mapper;
+package com.hmall.user.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.hmall.domain.po.User;
+import com.hmall.user.domain.po.User;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
 
