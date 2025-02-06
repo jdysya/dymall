@@ -1,5 +1,6 @@
 .DS_Store
 docker/mysql/data/
-docker/mysql/init
-.idea
+docker/mysql/init/
+.idea/
 logs/
+target/

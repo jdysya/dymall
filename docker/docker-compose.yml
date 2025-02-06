@@ -38,6 +38,18 @@ services:
     #   - hmall
     networks:
       - hm-net
+  nacos:
+    image: nacos/nacos-server:v2.1.0-slim
+    container_name: nacos
+    env_file:
+      - ./nacos/custom.env
+    ports:
+      - "8848:8848"
+      - "9848:9848"
+      - "9849:9849"
+    restart: always
+    networks:
+      - hm-net
 networks:
   hm-net:
     name: hmall
