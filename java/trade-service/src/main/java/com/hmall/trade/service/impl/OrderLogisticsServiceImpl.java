@@ -1,9 +1,9 @@
-package com.hmall.service.impl;
+package com.hmall.trade.service.impl;
 
-import com.hmall.domain.po.OrderLogistics;
-import com.hmall.mapper.OrderLogisticsMapper;
-import com.hmall.service.IOrderLogisticsService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.hmall.trade.domain.po.OrderLogistics;
+import com.hmall.trade.mapper.OrderLogisticsMapper;
+import com.hmall.trade.service.IOrderLogisticsService;
 import org.springframework.stereotype.Service;
 
 /**
