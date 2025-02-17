@@ -2,9 +2,9 @@ package com.hmall.user.controller;
 
 import com.hmall.user.domain.dto.LoginFormDTO;
 import com.hmall.user.domain.po.User;
-import com.hmall.user.domain.vo.UserEditVO;
+import com.hmall.user.domain.dto.UserEditDTO;
 import com.hmall.user.domain.vo.UserLoginVO;
-import com.hmall.user.domain.vo.UserRegisterVO;
+import com.hmall.user.domain.dto.UserRegisterDTO;
 import com.hmall.user.service.IUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -39,7 +39,7 @@ public class UserController {
     }
     @ApiOperation("用户注册")
     @PostMapping("/register")
-    public void register(@RequestBody @Validated UserRegisterVO userRegister){
+    public void register(@RequestBody @Validated UserRegisterDTO userRegister){
         userService.register(userRegister);
     }
     @ApiOperation("根据id删除用户")
@@ -52,7 +52,7 @@ public class UserController {
     }
     @ApiOperation("更新用户")
     @PostMapping("/update")
-    public void updateUser(@RequestBody UserEditVO userEdit){
+    public void updateUser(@RequestBody UserEditDTO userEdit){
         userService.updateUserById(userEdit);
     }
     @ApiOperation("根据id查询用户")

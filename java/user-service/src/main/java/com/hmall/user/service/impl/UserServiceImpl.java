@@ -9,9 +9,9 @@ import com.hmall.common.utils.UserContext;
 import com.hmall.user.config.JwtProperties;
 import com.hmall.user.domain.dto.LoginFormDTO;
 import com.hmall.user.domain.po.User;
-import com.hmall.user.domain.vo.UserEditVO;
+import com.hmall.user.domain.dto.UserEditDTO;
 import com.hmall.user.domain.vo.UserLoginVO;
-import com.hmall.user.domain.vo.UserRegisterVO;
+import com.hmall.user.domain.dto.UserRegisterDTO;
 import com.hmall.user.enums.UserStatus;
 import com.hmall.user.mapper.UserMapper;
 import com.hmall.user.service.IUserService;
@@ -90,7 +90,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public void register(UserRegisterVO userRegister) {
+    public void register(UserRegisterDTO userRegister) {
         userRegister.setBalance(0);
         userRegister.setCreateTime(LocalDateTime.now());
         userRegister.setUpdateTime(LocalDateTime.now());
@@ -102,7 +102,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public void updateUserById(UserEditVO userEdit) {
+    public void updateUserById(UserEditDTO userEdit) {
         userEdit.setUpdateTime(LocalDateTime.now());
         User user = new User();
         BeanUtils.copyProperties(userEdit,user);

@@ -2,10 +2,10 @@ package com.hmall.user.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hmall.user.domain.dto.LoginFormDTO;
+import com.hmall.user.domain.dto.UserEditDTO;
 import com.hmall.user.domain.po.User;
-import com.hmall.user.domain.vo.UserEditVO;
 import com.hmall.user.domain.vo.UserLoginVO;
-import com.hmall.user.domain.vo.UserRegisterVO;
+import com.hmall.user.domain.dto.UserRegisterDTO;
 
 /**
  * <p>
@@ -21,7 +21,7 @@ public interface IUserService extends IService<User> {
 
     void deductMoney(String pw, Integer totalFee);
 
-    void register(UserRegisterVO userRegister);
+    void register(UserRegisterDTO userRegister);
 
-    void updateUserById(UserEditVO userEdit);
+    void updateUserById(UserEditDTO userEdit);
 }
