@@ -1,12 +1,15 @@
 package com.hmall.trade.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hmall.api.client.CartClient;
 import com.hmall.api.client.ItemClient;
 import com.hmall.api.dto.ItemDTO;
 import com.hmall.api.dto.OrderDetailDTO;
 import com.hmall.common.exception.BadRequestException;
+import com.hmall.common.utils.BeanUtils;
 import com.hmall.common.utils.UserContext;
+import com.hmall.trade.domain.dto.OrderEditDTO;
 import com.hmall.trade.domain.dto.OrderFormDTO;
 import com.hmall.trade.domain.po.Order;
 import com.hmall.trade.domain.po.OrderDetail;
@@ -17,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.ValidationException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -93,10 +97,19 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     }
 
     @Override
-    public void updateOrder(Order order) {
-        // 验证输入的数据
-
+    public void updateOrder(OrderEditDTO orderEditDTO) {
+        // 验证输入的数据，如果有输入金额，输入金额必须大于等于0
+        if (orderEditDTO.getTotalFee() != null && orderEditDTO.getTotalFee() < 0) {
+            throw new ValidationException("总金额必须大于等于0");
+        }
+        orderEditDTO.setUpdateTime(LocalDateTime.now());
         //更新数据
+        UpdateWrapper<Order> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.eq("id",orderEditDTO.getId());
+        Order oder = new Order();
+        BeanUtils.copyProperties(orderEditDTO,oder);
+        update(oder, updateWrapper);
+
     }
 
     private List<OrderDetail> buildDetails(Long orderId, List<ItemDTO> items, Map<Long, Integer> numMap) {

@@ -1,6 +1,7 @@
 package com.hmall.trade.controller;
 
 import com.hmall.common.utils.BeanUtils;
+import com.hmall.trade.domain.dto.OrderEditDTO;
 import com.hmall.trade.domain.dto.OrderFormDTO;
 import com.hmall.trade.domain.po.Order;
 import com.hmall.trade.domain.vo.OrderVO;
@@ -39,7 +40,7 @@ public class OrderController {
     }
     @ApiOperation("修改订单信息")
     @PostMapping("/update")
-    public void updateOrder(@RequestBody Order order){
-        orderService.updateOrder(order);
+    public void updateOrder(@RequestBody OrderEditDTO orderEditDTO){
+        orderService.updateOrder(orderEditDTO);
     }
 }

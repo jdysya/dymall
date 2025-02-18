@@ -1,17 +1,22 @@
 package com.hmall.trade.domain.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Data
-@ApiModel(description = "订单页面VO")
+//@NoArgsConstructor 不知道为啥这两没生效
+//@AllArgsConstructor
+@ApiModel(description = "订单表单实体")
 public class OrderEditDTO {
-    @ApiModelProperty("订单id")
+    @ApiModelProperty(value = "订单id",required = true)
     private Long id;
-    @ApiModelProperty("总金额，单位为分")
+    @ApiModelProperty("总金额，单位为分，取值大于等于0")
     private Integer totalFee;
     @ApiModelProperty("支付类型，1、支付宝，2、微信，3、扣减余额")
     private Integer paymentType;
@@ -31,4 +36,28 @@ public class OrderEditDTO {
     private LocalDateTime closeTime;
     @ApiModelProperty("评价时间")
     private LocalDateTime commentTime;
+    @JsonIgnore
+    private LocalDateTime updateTime;
+    // 无参构造函数
+    public OrderEditDTO() {
+    }
+
+    // 全参构造函数
+    public OrderEditDTO(Long id, Integer totalFee, Integer paymentType, Long userId, Integer status,
+                        LocalDateTime createTime, LocalDateTime payTime, LocalDateTime consignTime,
+                        LocalDateTime endTime, LocalDateTime closeTime, LocalDateTime commentTime,
+                        LocalDateTime updateTime) {
+        this.id = id;
+        this.totalFee = totalFee;
+        this.paymentType = paymentType;
+        this.userId = userId;
+        this.status = status;
+        this.createTime = createTime;
+        this.payTime = payTime;
+        this.consignTime = consignTime;
+        this.endTime = endTime;
+        this.closeTime = closeTime;
+        this.commentTime = commentTime;
+        this.updateTime = updateTime;
+    }
 }
