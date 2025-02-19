@@ -42,6 +42,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     private final JwtTool jwtTool;
 
     private final JwtProperties jwtProperties;
+    private final UserMapper userMapper;
 
     @Override
     public UserLoginVO login(LoginFormDTO loginDTO) {
@@ -106,14 +107,22 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         userEdit.setUpdateTime(LocalDateTime.now());
         User user = new User();
         BeanUtils.copyProperties(userEdit,user);
-        user.setPassword(passwordEncoder.encode(userEdit.getPassword()));
-        updateById(user);
+        // 这里都没验证密码是不是不存在就给她加密不合理
+//        user.setPassword(passwordEncoder.encode(userEdit.getPassword()));
+        if (userEdit.getPassword() != null && !userEdit.getPassword().isEmpty()){
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
+        Integer i = null;
+        if(user.getStatus() != null){
+            i = user.getStatus().getValue();
+        }
         LambdaUpdateWrapper<User> updateWrapper = new LambdaUpdateWrapper<>();
         updateWrapper.eq(User::getId, user.getId())
                 .set(user.getPhone() != null && !user.getPhone().isEmpty(), User::getPhone, user.getPhone())
                 .set(user.getUsername() != null && !user.getUsername().isEmpty(), User::getUsername, user.getUsername())
                 .set(user.getPassword() != null && !user.getPassword().isEmpty(), User::getPassword, user.getPassword())
-                .set(User::getStatus, user.getStatus().getValue())
+                .set(user.getStatus() !=null, User::getStatus, i)
                 .set(User::getUpdateTime, user.getUpdateTime());
+        userMapper.update(null, updateWrapper);
     }
 }
