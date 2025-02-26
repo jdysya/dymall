@@ -5,3 +5,4 @@ docker/mysql/init/
 logs/
 target
 .vscode/
+golang/microservice-demo/go.sum

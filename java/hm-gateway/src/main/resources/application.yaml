@@ -11,3 +11,4 @@ hm:
       - /search/**
       - /users/login
       - /items/**
+      - /demo/**
