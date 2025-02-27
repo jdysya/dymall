@@ -1,4 +1,3 @@
-
 services:
   mysql:
     image: mysql
@@ -50,6 +49,27 @@ services:
     restart: always
     networks:
       - hm-net
+  rabbitmq:
+    image: rabbitmq:3.8-management
+    container_name: mq
+    hostname: mq
+    environment:
+      RABBITMQ_DEFAULT_USER: jdysya
+      RABBITMQ_DEFAULT_PASS: 123321
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    volumes:
+      - mq-plugins:/plugins
+      - mq-data:/var/lib/rabbitmq
+    networks:
+      - hm-net
+
 networks:
   hm-net:
     name: hmall
+
+volumes:
+  mq-plugins:
+  mq-data:
+  

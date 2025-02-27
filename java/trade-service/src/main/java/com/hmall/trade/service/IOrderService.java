@@ -20,4 +20,6 @@ public interface IOrderService extends IService<Order> {
     void markOrderPaySuccess(Long orderId);
 
     void updateOrder(OrderEditDTO orderEditDTO);
+
+    void cancelOrder(Long orderId);
 }
