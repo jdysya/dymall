@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hmall.user.mapper.UserMapper">
+    <insert id="updateUserRoles">
+        INSERT INTO tb_user_role (user_id, role_id)
+        VALUES
+        <foreach collection="roles" item="role" separator=",">
+            (#{userId}, #{role.id})
+        </foreach>
+    </insert>
     <select id="queryUserRoles" resultType="java.lang.String">
         select
             tr.name

@@ -8,10 +8,12 @@ import com.hmall.common.exception.ForbiddenException;
 import com.hmall.common.utils.UserContext;
 import com.hmall.user.config.JwtProperties;
 import com.hmall.user.domain.dto.LoginFormDTO;
+import com.hmall.user.domain.dto.UserRoleDto;
 import com.hmall.user.domain.po.User;
 import com.hmall.user.domain.dto.UserEditDTO;
 import com.hmall.user.domain.vo.UserLoginVO;
 import com.hmall.user.domain.dto.UserRegisterDTO;
+import com.hmall.user.enums.UserRoles;
 import com.hmall.user.enums.UserStatus;
 import com.hmall.user.mapper.UserMapper;
 import com.hmall.user.service.IUserService;
@@ -140,5 +142,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Override
     public List<String> queryUserRoles(Long userId) {
         return userMapper.queryUserRoles(userId);
+    }
+
+    @Override
+    public void updateUserRoles(UserRoleDto userRoleDto) {
+        Long userId = userRoleDto.getUserId();
+        List<UserRoles> roles = userRoleDto.getUserRoles();
+
+        // 先删除用户id已有的权限
+        userMapper.deleteByUserId(userId);
+        // 更新新的权限
+        System.out.println(userId);
+        System.out.println(roles);
+        userMapper.updateUserRoles(userId, roles);
     }
 }

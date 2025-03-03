@@ -3,9 +3,11 @@ package com.hmall.user.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hmall.user.domain.dto.LoginFormDTO;
 import com.hmall.user.domain.dto.UserEditDTO;
+import com.hmall.user.domain.dto.UserRoleDto;
 import com.hmall.user.domain.po.User;
 import com.hmall.user.domain.vo.UserLoginVO;
 import com.hmall.user.domain.dto.UserRegisterDTO;
+import com.hmall.user.enums.UserRoles;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,4 +35,6 @@ public interface IUserService extends IService<User> {
     Set<String> queryUserPermissions(Long userId);
 
     List<String> queryUserRoles(Long userId);
+
+    void updateUserRoles(UserRoleDto userRolesDto);
 }

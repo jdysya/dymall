@@ -23,13 +23,14 @@ public class OrderController {
 
     @ApiOperation("根据id查询订单")
     @GetMapping("{id}")
-    @RequirePermission({"users","SuperAdmin"})
+    @RequirePermission({"Guest","OrderAdmin","SuperAdmin"})
     public OrderVO queryOrderById(@Param ("订单id")@PathVariable("id") Long orderId) {
         return BeanUtils.copyBean(orderService.getById(orderId), OrderVO.class);
     }
 
     @ApiOperation("创建订单")
     @PostMapping
+    @RequirePermission({"Guest","OrderAdmin","SuperAdmin"})
     public Long createOrder(@RequestBody OrderFormDTO orderFormDTO){
         return orderService.createOrder(orderFormDTO);
     }
@@ -37,11 +38,13 @@ public class OrderController {
     @ApiOperation("标记订单已支付")
     @ApiImplicitParam(name = "orderId", value = "订单id", paramType = "path")
     @PutMapping("/{orderId}")
+    @RequirePermission({"OrderAdmin","SuperAdmin"})
     public void markOrderPaySuccess(@PathVariable("orderId") Long orderId) {
         orderService.markOrderPaySuccess(orderId);
     }
     @ApiOperation("修改订单信息")
     @PostMapping("/update")
+    @RequirePermission({"OrderAdmin","SuperAdmin"})
     public void updateOrder(@RequestBody OrderEditDTO orderEditDTO){
         orderService.updateOrder(orderEditDTO);
     }

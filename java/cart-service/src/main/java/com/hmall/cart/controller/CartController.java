@@ -6,6 +6,7 @@ import com.hmall.cart.domain.dto.CartFormDTO;
 import com.hmall.cart.domain.po.Cart;
 import com.hmall.cart.domain.vo.CartVO;
 import com.hmall.cart.service.ICartService;
+import com.hmall.common.annotation.RequirePermission;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -25,30 +26,35 @@ public class CartController {
 
     @ApiOperation("添加商品到购物车")
     @PostMapping
+    @RequirePermission({"Guest","SuperAdmin"})
     public void addItem2Cart(@Valid @RequestBody CartFormDTO cartFormDTO){
         cartService.addItem2Cart(cartFormDTO);
     }
 
     @ApiOperation("更新购物车数据")
     @PutMapping
+    @RequirePermission({"Guest","SuperAdmin"})
     public void updateCart(@RequestBody Cart cart){
         cartService.updateById(cart);
     }
 
     @ApiOperation("删除购物车中商品")
     @DeleteMapping("{id}")
+    @RequirePermission({"Guest","SuperAdmin"})
     public void deleteCartItem(@Param ("购物车条目id")@PathVariable("id") Long id){
         cartService.removeById(id);
     }
 
     @ApiOperation("查询购物车列表")
     @GetMapping
+    @RequirePermission({"Guest","SuperAdmin"})
     public List<CartVO> queryMyCarts(){
         return cartService.queryMyCarts();
     }
     @ApiOperation("批量删除购物车中商品")
     @ApiImplicitParam(name = "ids", value = "购物车条目id集合",required = true)
     @DeleteMapping
+    @RequirePermission({"Guest","SuperAdmin"})
     public void deleteCartItemByIds(@RequestParam("ids") List<Long> ids){
         cartService.removeByItemIds(ids);
     }

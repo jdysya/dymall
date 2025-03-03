@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @MapperScan("com.hmall.item.mapper")
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.hmall.common", "com.hmall.item"})
 public class ItemApplication {
     public static void main(String[] args) {
         SpringApplication.run(ItemApplication.class, args);

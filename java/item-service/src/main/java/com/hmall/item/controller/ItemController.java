@@ -4,6 +4,7 @@ package com.hmall.item.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hmall.api.dto.ItemDTO;
 import com.hmall.api.dto.OrderDetailDTO;
+import com.hmall.common.annotation.RequirePermission;
 import com.hmall.common.domain.PageDTO;
 import com.hmall.common.domain.PageQuery;
 import com.hmall.common.utils.BeanUtils;
@@ -26,6 +27,7 @@ public class ItemController {
 
     @ApiOperation("分页查询商品")
     @GetMapping("/page")
+    @RequirePermission({"Guest","ItemAdmin","OrderAdmin","SuperAdmin"})
     public PageDTO<ItemDTO> queryItemByPage(PageQuery query) {
         // 1.分页查询
         Page<Item> result = itemService.page(query.toMpPage("update_time", false));
@@ -35,18 +37,21 @@ public class ItemController {
 
     @ApiOperation("根据id批量查询商品")
     @GetMapping
+    @RequirePermission({"Guest","ItemAdmin","OrderAdmin","SuperAdmin"})
     public List<ItemDTO> queryItemByIds(@RequestParam("ids") List<Long> ids){
         return itemService.queryItemByIds(ids);
     }
 
     @ApiOperation("根据id查询商品")
     @GetMapping("{id}")
+    @RequirePermission({"Guest","ItemAdmin","OrderAdmin","SuperAdmin"})
     public ItemDTO queryItemById(@PathVariable("id") Long id) {
         return BeanUtils.copyBean(itemService.getById(id), ItemDTO.class);
     }
 
     @ApiOperation("新增商品")
     @PostMapping
+    @RequirePermission({"ItemAdmin","SuperAdmin"})
     public void saveItem(@RequestBody ItemDTO item) {
         // 新增
         itemService.save(BeanUtils.copyBean(item, Item.class));
@@ -54,6 +59,7 @@ public class ItemController {
 
     @ApiOperation("更新商品状态")
     @PutMapping("/status/{id}/{status}")
+    @RequirePermission({"ItemAdmin","SuperAdmin"})
     public void updateItemStatus(@PathVariable("id") Long id, @PathVariable("status") Integer status){
         Item item = new Item();
         item.setId(id);
@@ -63,6 +69,7 @@ public class ItemController {
 
     @ApiOperation("更新商品")
     @PutMapping
+    @RequirePermission({"ItemAdmin","SuperAdmin"})
     public void updateItem(@RequestBody ItemDTO item) {
         // 不允许修改商品状态，所以强制设置为null，更新时，就会忽略该字段
         item.setStatus(null);
@@ -72,12 +79,14 @@ public class ItemController {
 
     @ApiOperation("根据id删除商品")
     @DeleteMapping("{id}")
+    @RequirePermission({"ItemAdmin","SuperAdmin"})
     public void deleteItemById(@PathVariable("id") Long id) {
         itemService.removeById(id);
     }
 
     @ApiOperation("批量扣减库存")
     @PutMapping("/stock/deduct")
+    @RequirePermission({"ItemAdmin","SuperAdmin"})
     public void deductStock(@RequestBody List<OrderDetailDTO> items){
         itemService.deductStock(items);
     }

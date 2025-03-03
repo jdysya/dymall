@@ -1,6 +1,7 @@
 package com.hmall.user.controller;
 
 
+import com.hmall.common.annotation.RequirePermission;
 import com.hmall.common.exception.BadRequestException;
 import com.hmall.common.utils.BeanUtils;
 import com.hmall.common.utils.CollUtils;
@@ -36,6 +37,7 @@ public class AddressController {
 
     @ApiOperation("根据id查询地址")
     @GetMapping("{addressId}")
+    @RequirePermission({"Guest","ItemAdmin","OrderAdmin","SuperAdmin"})
     public AddressDTO findAddressById(@ApiParam("地址id") @PathVariable("addressId") Long id) {
         // 1.根据id查询
         Address address = addressService.getById(id);
@@ -48,6 +50,7 @@ public class AddressController {
     }
     @ApiOperation("查询当前用户地址列表")
     @GetMapping
+    @RequirePermission({"Guest","SuperAdmin"})
     public List<AddressDTO> findMyAddresses() {
         // 1.查询列表
         List<Address> list = addressService.query().eq("user_id", UserContext.getUser()).list();
