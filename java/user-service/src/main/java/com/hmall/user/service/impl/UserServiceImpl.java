@@ -24,6 +24,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * <p>
@@ -124,5 +128,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
                 .set(user.getStatus() !=null, User::getStatus, i)
                 .set(User::getUpdateTime, user.getUpdateTime());
         userMapper.update(null, updateWrapper);
+    }
+
+    // 还没实现
+    @Override
+    public Set<String> queryUserPermissions(Long userId) {
+        // 获取用户身份信息
+        return Set.of();
+    }
+
+    @Override
+    public List<String> queryUserRoles(Long userId) {
+        return userMapper.queryUserRoles(userId);
     }
 }

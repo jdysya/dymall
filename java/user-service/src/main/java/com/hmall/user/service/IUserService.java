@@ -7,6 +7,11 @@ import com.hmall.user.domain.po.User;
 import com.hmall.user.domain.vo.UserLoginVO;
 import com.hmall.user.domain.dto.UserRegisterDTO;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 /**
  * <p>
  * 用户表 服务类
@@ -24,4 +29,8 @@ public interface IUserService extends IService<User> {
     void register(UserRegisterDTO userRegister);
 
     void updateUserById(UserEditDTO userEdit);
+
+    Set<String> queryUserPermissions(Long userId);
+
+    List<String> queryUserRoles(Long userId);
 }

@@ -10,4 +10,9 @@ hm:
     excludePaths: # 无需登录校验的路径
       - /search/**
       - /users/login
-      - /items/**
+      - /users/register
+    whiteList:
+      - path: /items/**
+        methods: [ GET ]
+      - path: /carts/**
+        methods: [ GET ]

@@ -1,5 +1,6 @@
 package com.hmall.trade.controller;
 
+import com.hmall.common.annotation.RequirePermission;
 import com.hmall.common.utils.BeanUtils;
 import com.hmall.trade.domain.dto.OrderEditDTO;
 import com.hmall.trade.domain.dto.OrderFormDTO;
@@ -22,6 +23,7 @@ public class OrderController {
 
     @ApiOperation("根据id查询订单")
     @GetMapping("{id}")
+    @RequirePermission({"users","SuperAdmin"})
     public OrderVO queryOrderById(@Param ("订单id")@PathVariable("id") Long orderId) {
         return BeanUtils.copyBean(orderService.getById(orderId), OrderVO.class);
     }

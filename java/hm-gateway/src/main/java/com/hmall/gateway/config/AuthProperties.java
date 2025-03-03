@@ -10,4 +10,11 @@ import java.util.List;
 public class AuthProperties {
     private List<String> includePaths;
     private List<String> excludePaths;
+    private List<WhiteListEntry> whiteList;
+
+    @Data
+    public static class WhiteListEntry {
+        private String path;
+        private List<String> methods;
+    }
 }

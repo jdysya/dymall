@@ -12,10 +12,12 @@ public class UserInfoInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // 1.获取请求头中的用户信息
         String userInfo = request.getHeader("user-info");
+        String userRole = request.getHeader("user-role");
         // 2.判断是否为空
         if (StrUtil.isNotBlank(userInfo)) {
             // 不为空，保存到ThreadLocal
             UserContext.setUser(Long.valueOf(userInfo));
+            UserContext.setRole(userRole);
         }
         // 3.放行
         return true;
@@ -25,5 +27,6 @@ public class UserInfoInterceptor implements HandlerInterceptor {
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         // 移除用户
         UserContext.removeUser();
+        UserContext.removeRole();
     }
 }

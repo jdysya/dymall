@@ -14,6 +14,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 @Api(tags = "用户相关接口")
 @RestController
 @RequestMapping("/users")
@@ -55,13 +60,29 @@ public class UserController {
     public void updateUser(@RequestBody UserEditDTO userEdit){
         userService.updateUserById(userEdit);
     }
-    @ApiOperation("根据id查询用户")
+    @ApiOperation("根据id查询用户信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "用户id",required = true),
     })
     @GetMapping("/{id}")
     public User getUserById(@PathVariable Long id){
         return userService.getById(id);
+    }
+    @ApiOperation("根据id查询用户角色")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "用户id",required = true),
+    })
+    @GetMapping("/permissions")
+    public Set<String> queryUserPermissions(@RequestParam("userId") Long userId) {
+        return userService.queryUserPermissions(userId);
+    }
+    @ApiOperation("根据id查询用户角色id")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "用户id",required = true),
+    })
+    @GetMapping("/roles")
+    public List<String> queryUserRoles(@RequestParam("userId") Long userId) {
+        return userService.queryUserRoles(userId);
     }
 }
 
